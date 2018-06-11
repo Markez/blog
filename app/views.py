@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from django.shortcuts import render, render_to_response, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.http import HttpResponse
@@ -11,6 +12,7 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
+from django.contrib import messages
 
 
 # Create your views here.
@@ -34,7 +36,10 @@ def signup(request):
                 mail_subject, message, to=[to_email]
             )
             email.send()
-            return HttpResponse('Please confirm your email address to complete the registration')
+            # return HttpResponse('Please confirm your email address to complete the registration')
+            messages.add_message(request, messages.SUCCESS,
+                                 "Howdy <b>" + user.username + "</b> Please confirm your email.")
+            # return HttpResponseRedirect('/login/')
     else:
         form = SignupForm()
     return render(request, 'registration/registration.html', {'form': form})

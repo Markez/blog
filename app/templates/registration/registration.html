@@ -17,16 +17,16 @@
             </div>
         </div>
         {% csrf_token %}
-        <!--{% if messages %}-->
-          <!--{% for msg in messages %}-->
-            <!--<div class="alert alert-{{msg.level_tag}} alert-dismissible" role="alert">-->
-              <!--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>-->
-              <!--{% autoescape off %}-->
-                <!--{{ msg.message }}-->
-              <!--{% endautoescape %}-->
-            <!--</div>-->
-          <!--{% endfor %}-->
-        <!--{% endif %}-->
+        {% if messages %}
+          {% for msg in messages %}
+            <div class="alert alert-{{msg.level_tag}} alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+              {% autoescape off %}
+                {{ msg.message }}
+              {% endautoescape %}
+            </div>
+          {% endfor %}
+        {% endif %}
 
         {% if form.errors %}
           <div class="alert alert-danger alert-dismissible">

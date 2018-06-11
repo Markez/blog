@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 # models for departments
 class Order(models.Model):
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
-    order_number = models.IntegerField(max_length=50)
+    order_number = models.IntegerField()
     order_item = models.TextField(max_length=1000)
     date = models.DateTimeField(default=datetime.datetime.now)
 

@@ -5,7 +5,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     # django
     url(r'^$', auth_views.login, name='login'),
-    url(r'^registration/', views.UserFormView.as_view(), name='registration'),
+    # url(r'^registration/', views.UserFormView.as_view(), name='registration'),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': 'login'}, name='logout'),

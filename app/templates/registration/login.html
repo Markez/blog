@@ -1,0 +1,94 @@
+{% block content %}
+{% include "registration/header.html" %}
+{% load staticfiles %}
+<title>Blog | Login</title>
+<section class="login-container boxed-login">
+<div class="container">
+<div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
+<div class="login-form-container">
+        <div class="login-form-header">
+            <div class="logo">
+                <a href='' title="Safaribet Observer"><img src="{% static 'images/logo-dark.png' %}" alt="logo"></a>
+            </div>
+        </div>
+        <!-- start response from server -->
+            {% if form.errors %}
+            <p>Your username and password didn't match. Please try again.</p>
+            {% endif %}
+
+            {% if next %}
+                {% if user.is_authenticated %}
+                <p>Your account doesn't have access to this page. To proceed,
+                please login with an account that has access.</p>
+                {% else %}
+                <p>Please login to see this page.</p>
+                {% endif %}
+            {% endif %}
+        <!-- end response from server -->
+    <form  method="post" action="{% url 'login' %}" class="j-forms"  novalidate>
+        {% csrf_token %}
+        <div class="login-form-content">
+
+            <!-- start login -->
+            <div class="unit">
+                <div class="input login-input">
+                    <label class="icon-left" for="username">
+                        <i class="zmdi zmdi-account"></i>
+                    </label>
+                    <input class="form-control login-frm-input"  type="text" id="username" name="username" placeholder="Username" required>
+                </div>
+            </div>
+            <!-- end login -->
+
+            <!-- start password -->
+            <div class="unit">
+                <div class="input login-input">
+                    <label class="icon-left" for="password">
+                        <i class="zmdi zmdi-key"></i>
+                    </label>
+                    <input class="form-control login-frm-input"  type="password" id="password" name="password" placeholder="Password" required>
+{#                        <span class="hint">#}
+{#                            <a href='{% url "Forgot_Password" %}' class="link">Forgot password?</a>#}
+{#                        </span>#}
+                </div>
+            </div>
+            <!-- end password -->
+
+
+            <!-- start keep logged -->
+            <div class="unit">
+                <label class="checkbox">
+                    <input type="checkbox" id="stayloggedin" name="stayloggedin" value="true" checked="">
+                    <i></i>
+                    Keep me logged in
+                </label>
+            </div>
+            <!-- end keep logged -->
+
+        </div>
+        <div class="login-form-footer">
+            <input type="submit" class="btn-block btn btn-primary" value="login" />
+{#            <button type="submit" class="btn-block btn btn-primary">Login</button>#}
+            <input type="hidden" name="next" value="{{ next }}" />
+        </div>
+
+    </form>
+</div>
+</div>
+</div>
+<!--Footer Start Here -->
+<footer class="login-page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
+                <div class="footer-content">
+                    <span class="footer-meta" target="_blank">Create&nbsp;an&nbsp;<a href='{% url "signup" %}'>Account!</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--Footer End Here -->
+</section>
+{% include "registration/footer.html" %}
+{% endblock %}
